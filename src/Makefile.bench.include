@@ -1,0 +1,45 @@
+bin_PROGRAMS += bench/bench_dcu
+BENCH_SRCDIR = bench
+BENCH_BINARY = bench/bench_dcu$(EXEEXT)
+
+
+bench_bench_dcu_SOURCES = \
+  bench/bench_dcu.cpp \
+  bench/bench.cpp \
+  bench/bench.h \
+  bench/Examples.cpp
+
+bench_bench_dcu_CPPFLAGS = $(AM_CPPFLAGS) $(DCU_INCLUDES) $(EVENT_CLFAGS) $(EVENT_PTHREADS_CFLAGS) -I$(builddir)/bench/
+bench_bench_dcu_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bench_bench_dcu_LDADD = \
+  $(LIBDCU_SERVER) \
+  $(LIBDCU_COMMON) \
+  $(LIBDCU_UTIL) \
+  $(LIBDCU_CRYPTO) \
+  $(LIBLEVELDB) \
+  $(LIBMEMENV) \
+  $(LIBSECP256K1) \
+  $(LIBUNIVALUE)
+
+if ENABLE_ZMQ
+bench_bench_dcu_LDADD += $(LIBDCU_ZMQ) $(ZMQ_LIBS)
+endif
+
+if ENABLE_WALLET
+bench_bench_dcu_LDADD += $(LIBDCU_WALLET)
+endif
+
+bench_bench_dcu_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+bench_bench_dcu_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+
+CLEAN_DCU_BENCH = bench/*.gcda bench/*.gcno
+
+CLEANFILES += $(CLEAN_DCU_BENCH)
+
+dcu_bench: $(BENCH_BINARY)
+
+bench: $(BENCH_BINARY) FORCE
+	$(BENCH_BINARY)
+
+dcu_bench_clean : FORCE
+	rm -f $(CLEAN_DCU_BENCH) $(bench_bench_dcu_OBJECTS) $(BENCH_BINARY)

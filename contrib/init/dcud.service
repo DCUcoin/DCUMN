@@ -1,0 +1,22 @@
+[Unit]
+Description=DCU's distributed currency daemon
+After=network.target
+
+[Service]
+User=dcucore
+Group=dcucore
+
+Type=forking
+PIDFile=/var/lib/dcud/dcud.pid
+ExecStart=/usr/bin/dcud -daemon -pid=/var/lib/dcud/dcud.pid \
+-conf=/etc/dcucore/dcu.conf -datadir=/var/lib/dcud -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

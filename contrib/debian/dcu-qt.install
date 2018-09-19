@@ -1,0 +1,6 @@
+usr/local/bin/dcu-qt usr/bin
+share/pixmaps/dcu32.xpm usr/share/pixmaps
+share/pixmaps/dcu16.xpm usr/share/pixmaps
+share/pixmaps/dcu128.png usr/share/pixmaps
+debian/dcu-qt.desktop usr/share/applications
+debian/dcu-qt.protocol usr/share/kde4/services/

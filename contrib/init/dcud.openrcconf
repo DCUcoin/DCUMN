@@ -1,0 +1,33 @@
+# /etc/conf.d/dcud: config file for /etc/init.d/dcud
+
+# Config file location
+#DCUD_CONFIGFILE="/etc/dcucore/dcu.conf"
+
+# What directory to write pidfile to?  (created and owned by $DCUD_USER)
+#DCUD_PIDDIR="/var/run/dcud"
+
+# What filename to give the pidfile
+#DCUD_PIDFILE="${DCUD_PIDDIR}/dcud.pid"
+
+# Where to write dcud data (be mindful that the blockchain is large)
+#DCUD_DATADIR="/var/lib/dcud"
+
+# User and group to own dcud process
+#DCUD_USER="dcucore"
+#DCUD_GROUP="dcucore"
+
+# Path to dcud executable
+#DCUD_BIN="/usr/bin/dcud"
+
+# Nice value to run dcud under
+#DCUD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+DCUD_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for dcud to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+DCUD_SIGTERM_TIMEOUT=60

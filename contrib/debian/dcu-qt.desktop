@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DCU
+Comment=DCU P2P Cryptocurrency
+Comment[fr]=DCU, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DCU, eşten eşe kriptografik sanal para birimi
+Exec=dcu-qt %u
+Terminal=false
+Type=Application
+Icon=dcu128
+MimeType=x-scheme-handler/dcu;
+Categories=Office;Finance;
